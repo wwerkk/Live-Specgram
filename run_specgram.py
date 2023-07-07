@@ -18,10 +18,10 @@ import numpy as np
 import mic_read
 
 ############### Constants ###############
-#SAMPLES_PER_FRAME = 10 #Number of mic reads concatenated within a single window
-SAMPLES_PER_FRAME = 4
-nfft = 1024#256#1024 #NFFT value for spectrogram
-overlap = 1000#512 #overlap value for spectrogram
+SAMPLES_PER_FRAME = 16 #Number of mic reads concatenated within a single window
+# SAMPLES_PER_FRAME = 4
+nfft = 512 #256#1024 #NFFT value for spectrogram
+overlap = 256 #512 #overlap value for spectrogram
 rate = mic_read.RATE #sampling rate
 
 ############### Functions ###############
@@ -74,6 +74,8 @@ def main():
     """
     Launch the stream and the original spectrogram
     """
+    global stream, pa
+    global im
     stream,pa = mic_read.open_mic()
     data = get_sample(stream,pa)
     arr2D,freqs,bins = get_specgram(data,rate)
